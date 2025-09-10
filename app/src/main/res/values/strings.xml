@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">随心记</string>
+    <string name="title">标题</string>
+    <string name="title_input_hint">请输入标题</string>
+    <string name="content">内容</string>
+    <string name="content_input_hint">请输入标题</string>
+    <string name="text_size">文字大小:</string>
+    <string name="text_color">文字颜色:</string>
+    <string name="reset">重置</string>
+    <string name="save">保存</string>
+    <string name="save_success">保存成功</string>
+    <string name="useful_tips_1">注：这里显示的文字大小会和桌面的文字大小有差异，请按实际调整</string>
+    <string name="useful_tips_2">如果这里固定到桌面不成功，请到桌面长按手动添加小部件</string>
+    <string name="pin_widget">固定到桌面</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="widget_pin_success">小组件已固定到桌面</string>
+    <string name="widget_pin_fail">您的设备不支持直接添加小部件,请到桌面长按手动添加</string>
 </resources>

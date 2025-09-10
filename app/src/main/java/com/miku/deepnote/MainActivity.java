@@ -1,6 +1,9 @@
 package com.miku.deepnote;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -60,18 +63,11 @@ public class MainActivity extends AppCompatActivity {
 
         Button save=findViewById(R.id.save);
         save.setOnClickListener(v -> {
-            getSharedPreferences("Note",MODE_PRIVATE).edit().
-                    putString("title",title.getText().toString())
-                    .putString("text",text.getText().toString())
-                    .putInt("title_size",title_size.getProgress())
-                    .putInt("text_size",text_size.getProgress())
-                    .putInt("title_color",(int)title_color.getTag())
-                    .putInt("text_color",(int)text_color.getTag())
-                    .apply();
-            Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
-            Intent intent =new Intent(MainActivity.this, NoteWidgetProvider.class);
-            intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-            MainActivity.this.sendBroadcast(intent);
+            doSave(true);
+        });
+        Button pin=findViewById(R.id.pin);
+        pin.setOnClickListener(v -> {
+            pinWidgetToHomeScreen(MainActivity.this);
         });
 
 
@@ -137,10 +133,33 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        doSave(false);
+    }
+
+    private void doSave(boolean showToast){
+        getSharedPreferences("Note",MODE_PRIVATE).edit().
+                putString("title",title.getText().toString())
+                .putString("text",text.getText().toString())
+                .putInt("title_size",title_size.getProgress())
+                .putInt("text_size",text_size.getProgress())
+                .putInt("title_color",(int)title_color.getTag())
+                .putInt("text_color",(int)text_color.getTag())
+                .apply();
+        if(showToast){
+            Toast.makeText(this, R.string.save_success, Toast.LENGTH_SHORT).show();
+        }
+        Intent intent =new Intent(MainActivity.this, NoteWidgetProvider.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        sendBroadcast(intent);
+    }
+
     void showColorPicker(String title,View colorView){
         ColorPickerDialog.Builder dialogBuilder=new ColorPickerDialog.Builder(this)
                 .setTitle(title)
-                .setPositiveButton("确定",
+                .setPositiveButton(R.string.ok,
                         new ColorEnvelopeListener() {
                             @Override
                             public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
@@ -148,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
                                 colorView.setTag(envelope.getColor());
                             }
                         })
-                .setNegativeButton("取消",
+                .setNegativeButton(R.string.cancel,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -167,7 +186,38 @@ public class MainActivity extends AppCompatActivity {
             }
         },10);
 
-
         dialogBuilder.show();
     }
+
+
+    private void pinWidgetToHomeScreen(Context context) {
+        // 1. 获取 AppWidgetManager
+        AppWidgetManager appWidgetManager = (AppWidgetManager) context.getSystemService(Context.APPWIDGET_SERVICE);
+
+        // 2. 获取小部件的 ComponentName
+        ComponentName myWidgetComponent = new ComponentName(context, NoteWidgetProvider.class);
+
+        // 3. 检查设备是否支持固定小部件
+        if (appWidgetManager.isRequestPinAppWidgetSupported()) {
+            // 4. 创建回调 Intent
+            Intent successIntent = new Intent(WidgetPinSuccessReceiver.ACTION_PINNED_SUCCESS)
+                    .setClass(context, WidgetPinSuccessReceiver.class);
+
+            // 5. 创建 PendingIntent（兼容 Android 12+）
+            PendingIntent successPendingIntent = PendingIntent.getBroadcast(
+                    context,
+                    0, // requestCode
+                    successIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+            );
+
+            // 6. 发起请求
+            if(!appWidgetManager.requestPinAppWidget(myWidgetComponent,null,successPendingIntent)){
+                Toast.makeText(context, R.string.widget_pin_fail, Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(context, R.string.widget_pin_fail, Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

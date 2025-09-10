@@ -2,3 +2,52 @@
 plugins {
 alias(libs.plugins.android.application) apply false
 }
+
+ext {
+    isMasterBranch = checkMasterBranch()
+    def versionDesc = produceVersionDesc("100", "1.0.0.")
+    versionCode = versionDesc[0].toInteger()
+    versionName = versionDesc[1]
+}
+
+static boolean checkMasterBranch() {
+    def cmd3 = 'git symbolic-ref --short -q HEAD'
+    def branch = cmd3.execute().text.trim()
+    return branch.equalsIgnoreCase('main')
+}
+
+def fetGitVersion() {
+    //git commit數量
+    def cmd = 'git rev-list origin/main --count'
+    def gitVersion = cmd.execute().text.trim().toInteger()
+
+    //當前commit
+    def cmd2 = 'git rev-list HEAD --abbrev-commit --max-count=1'
+//    def commitId = cmd2.execute().text.trim()
+
+    def versionSuffix
+    def time = new Date().format("yyMMdd");
+    if (rootProject.ext.isMasterBranch) {
+        versionSuffix = String.format("%s", time)
+    } else {
+        //當前用戶名
+        def cmd4 = 'git config user.name'
+        def userName = cmd4.execute().text.trim()
+        versionSuffix = String.format("%s_%s", time, userName)
+    }
+    ext.versionCode = gitVersion
+    ext.versionSuffix = versionSuffix
+    return ext
+}
+
+def produceVersionDesc(String versionCodePre, String versionNamePre) {
+    def version = fetGitVersion()
+    def versionCode = String.format("%s%04d", versionCodePre, version.versionCode)
+    def versionName = String.format("%s%04d_%s", versionNamePre, version.versionCode, version.versionSuffix)
+    println("versionCode:" + versionCode)
+    println("versionName:" + versionName)
+    List<String> stringList = new ArrayList<String>()
+    stringList.add(versionCode)
+    stringList.add(versionName)
+    return stringList
+}

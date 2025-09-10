@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FreeNote</string>
+    <string name="title">Title</string>
+    <string name="title_input_hint">Enter title</string>
+    <string name="content">Content</string>
+    <string name="content_input_hint">Enter content</string>
+    <string name="text_size">Text size:</string>
+    <string name="text_color">Text color:</string>
+    <string name="reset">Reset</string>
+    <string name="save">Save</string>
+    <string name="save_success">Saved successfully</string>
+    <string name="useful_tips_1">Note: The text size shown here may differ from the actual size on the home screen. Please adjust accordingly.</string>
+    <string name="useful_tips_2">If pinning to home screen fails, long press on home screen to add widget manually.</string>
+    <string name="pin_widget">Pin to home screen</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="widget_pin_success">Widget pinned to home screen</string>
+    <string name="widget_pin_fail">Your device does not support direct widget pinning. Long press on home screen to add manually.</string>
+</resources>

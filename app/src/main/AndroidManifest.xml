@@ -30,6 +30,13 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info" />
         </receiver>
+        <receiver
+            android:name=".WidgetPinSuccessReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.miku.deepnote.ACTION_PINNED_SUCCESS" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

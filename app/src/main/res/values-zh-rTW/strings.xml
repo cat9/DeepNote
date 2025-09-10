@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">隨心記</string>
+    <string name="title">標題</string>
+    <string name="title_input_hint">請輸入標題</string>
+    <string name="content">內容</string>
+    <string name="content_input_hint">請輸入內容</string>
+    <string name="text_size">文字大小:</string>
+    <string name="text_color">文字顏色:</string>
+    <string name="reset">重置</string>
+    <string name="save">儲存</string>
+    <string name="save_success">儲存成功</string>
+    <string name="useful_tips_1">註：這裡顯示的文字大小會與桌面的文字大小有所差異，請依實際情況調整</string>
+    <string name="useful_tips_2">如果固定到桌面不成功，請至桌面長按手動新增小工具</string>
+    <string name="pin_widget">固定到桌面</string>
+    <string name="ok">確定</string>
+    <string name="cancel">取消</string>
+    <string name="widget_pin_success">小工具已固定到桌面</string>
+    <string name="widget_pin_fail">您的裝置不支援直接新增小工具，請至桌面長按手動新增</string>
+</resources>

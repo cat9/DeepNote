@@ -6,13 +6,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f0f0f0"
-    android:padding="8dp">
+    android:background="#f0f0f0">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="250dp"
+        android:paddingTop="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         >
 
         <androidx.cardview.widget.CardView
@@ -34,7 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="标题"
+                    android:text="@string/title"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -45,7 +47,7 @@
                     android:layout_marginTop="8dp"
                     android:background="@drawable/input_background"
                     android:gravity="left|top"
-                    android:hint="请输入标题"
+                    android:hint="@string/title_input_hint"
                     android:minLines="2"
                     android:padding="8dp"
                     android:lineSpacingMultiplier="0.65"
@@ -63,8 +65,7 @@
                         android:id="@+id/title_size_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-                        android:text="文字大小:"
+                        android:text="@string/text_size"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -88,7 +89,7 @@
                         android:id="@+id/title_color_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="文字颜色:"
+                        android:text="@string/text_color"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -118,7 +119,7 @@
                         android:id="@+id/title_color_reset"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="重置"
+                        android:text="@string/reset"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/title_color_container"
                         app:layout_constraintTop_toTopOf="parent"
@@ -158,7 +159,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="内容"
+                    android:text="@string/content"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -171,7 +172,7 @@
                     android:layout_marginTop="8dp"
                     android:background="@drawable/input_background"
                     android:gravity="left|top"
-                    android:hint="请输入内容"
+                    android:hint="@string/content_input_hint"
                     android:minLines="8"
                     android:padding="8dp"
                     android:lineSpacingMultiplier="0.65"
@@ -189,8 +190,7 @@
                         android:id="@+id/text_size_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-                        android:text="文字大小:"
+                        android:text="@string/text_size"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -214,7 +214,7 @@
                         android:id="@+id/text_color_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="文字颜色:"
+                        android:text="@string/text_color"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -245,7 +245,7 @@
                         android:id="@+id/text_color_reset"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="重置"
+                        android:text="@string/reset"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/text_color_container"
                         app:layout_constraintTop_toTopOf="parent"
@@ -271,20 +271,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="保存"
+            android:text="@string/save"
             android:textColor="@color/white"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/pin"
+            app:layout_constraintTop_toBottomOf="@+id/text_card" />
+        <Button
+            android:id="@+id/pin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/pin_widget"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@+id/save"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_card" />
 
         <TextView
+            android:id="@+id/tips_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="注：这里显示的文字大小会和桌面的文字大小有差异，请按实际调整"
+            android:text="@string/useful_tips_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/save"
+            android:layout_marginTop="8dp"
+            android:textColor="#666666"
+            android:textSize="12sp"
+            />
+        <TextView
+            android:id="@+id/tips_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/useful_tips_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tips_1"
             android:layout_marginTop="8dp"
             android:textColor="#666666"
             android:textSize="12sp"
