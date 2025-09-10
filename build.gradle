@@ -13,12 +13,12 @@ ext {
 static boolean checkMasterBranch() {
     def cmd3 = 'git symbolic-ref --short -q HEAD'
     def branch = cmd3.execute().text.trim()
-    return branch.equalsIgnoreCase('main')
+    return branch.equalsIgnoreCase('googleplay')
 }
 
 def fetGitVersion() {
     //git commit數量
-    def cmd = 'git rev-list origin/main --count'
+    def cmd = 'git rev-list origin/googleplay --count'
     def gitVersion = cmd.execute().text.trim().toInteger()
 
     //當前commit
