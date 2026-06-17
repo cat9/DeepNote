@@ -2,7 +2,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:fitsSystemWindows="true"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,13 +22,17 @@
             android:layout_height="wrap_content"
             android:elevation="0dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/white"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="8dp">
+                android:padding="8dp"
+                android:background="@color/white"
+                >
 
                 <TextView
                     android:id="@+id/title_desc"
@@ -48,7 +51,7 @@
                     android:background="@drawable/input_background"
                     android:gravity="left|top"
                     android:hint="@string/title_input_hint"
-                    android:minLines="2"
+                    android:minLines="1"
                     android:padding="8dp"
                     android:lineSpacingMultiplier="0.65"
                     />
@@ -146,13 +149,17 @@
             android:layout_marginTop="12dp"
             android:elevation="0dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_card">
+            app:layout_constraintTop_toBottomOf="@+id/title_card"
+            android:background="@color/white"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="8dp">
+                android:padding="8dp"
+                android:background="@color/white"
+                >
 
                 <TextView
                     android:id="@+id/text_desc"
